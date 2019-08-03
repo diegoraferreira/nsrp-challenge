@@ -3,15 +3,21 @@ package com.nsrp.challenge.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TIME",
-        indexes = @Index(name = "IX_NOME", columnList = "NOME", unique = true)
-)
+@Table(name = "TIME", indexes = @Index(name = "IX_NOME", columnList = "NOME", unique = true))
 @SequenceGenerator(name = "SEQ_TIME", sequenceName = "SEQ_TIME")
 public class Time {
 
     private Long id;
 
     private String nome;
+
+    public Time() {
+        super();
+    }
+
+    public Time(String nome) {
+        this.nome = nome;
+    }
 
     @Id
     @GeneratedValue(generator = "SEQ_TIME", strategy = GenerationType.SEQUENCE)
@@ -24,7 +30,7 @@ public class Time {
         this.id = id;
     }
 
-    @Column(name = "NOME")
+    @Column(name = "NOME", nullable = false)
     public String getNome() {
         return nome;
     }

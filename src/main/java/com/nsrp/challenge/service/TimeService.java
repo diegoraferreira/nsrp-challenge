@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class TimeService {
 
@@ -13,12 +15,13 @@ public class TimeService {
     private TimeRepository timeRepository;
 
     @Transactional
-    public void save(Time time) {
-        this.timeRepository.save(time);
+    public Time save(String time) {
+        Time timeDoCoracao = new Time(time);
+        return this.timeRepository.save(timeDoCoracao);
     }
 
     @Transactional(readOnly = true)
-    public boolean existsById(Long id) {
-        return this.timeRepository.existsById(id);
+    public Optional<Time> findByNome(String nome) {
+        return this.timeRepository.findByNome(nome);
     }
 }

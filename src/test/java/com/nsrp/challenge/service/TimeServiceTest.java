@@ -12,6 +12,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class TimeServiceTest {
 
+    private static final String TIME_DO_CORACAO = "TIME_DO_CORACAO";
+
     @Mock
     private TimeRepository timeRepository;
 
@@ -20,15 +22,13 @@ public class TimeServiceTest {
 
     @Test
     public void save() {
-        Time time = Mockito.mock(Time.class);
-        timeService.save(time);
-        Mockito.verify(timeRepository, Mockito.times(1)).save(time);
+        timeService.save(TIME_DO_CORACAO);
+        Mockito.verify(timeRepository, Mockito.times(1)).save(Mockito.any(Time.class));
     }
 
     @Test
-    public void existsById() {
-        Long id = 1L;
-        timeService.existsById(id);
-        Mockito.verify(timeRepository, Mockito.times(1)).existsById(id);
+    public void findByNome() {
+        timeService.findByNome(TIME_DO_CORACAO);
+        Mockito.verify(timeRepository, Mockito.times(1)).findByNome(TIME_DO_CORACAO);
     }
 }
