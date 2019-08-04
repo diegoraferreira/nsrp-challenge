@@ -18,6 +18,8 @@ public class Campanha {
 
     private LocalDate dataFimVigencia;
 
+    private boolean ativa;
+
     @Id
     @GeneratedValue(generator = "SEQ_CAMPANHA", strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false, updatable = false)
@@ -64,5 +66,14 @@ public class Campanha {
 
     public void setDataFimVigencia(LocalDate dataFimVigencia) {
         this.dataFimVigencia = dataFimVigencia;
+    }
+
+    @Column(name = "ATIVA", nullable = false)
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
     }
 }

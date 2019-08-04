@@ -13,6 +13,8 @@ import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -77,6 +79,13 @@ public class CampanhaServiceTest {
     }
 
     @Test
+    public void saveAll() {
+        List<Campanha> campanhas = Collections.singletonList(Mockito.mock(Campanha.class));
+        campanhaService.saveAll(campanhas);
+        Mockito.verify(campanhaRepository, Mockito.times(1)).saveAll(campanhas);
+    }
+
+    @Test
     public void delete() {
         Long id = 1L;
         campanhaService.delete(id);
@@ -89,5 +98,6 @@ public class CampanhaServiceTest {
         Assert.assertEquals(campanha.getTimeDoCoracao(), timeDoCoracao);
         Assert.assertEquals(campanha.getDataInicioVigencia(), DATA_INICIO);
         Assert.assertEquals(campanha.getDataFimVigencia(), DATA_FIM);
+        Assert.assertTrue(campanha.isAtiva());
     }
 }
