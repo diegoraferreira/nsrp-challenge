@@ -7,7 +7,9 @@ import com.nsrp.challenge.repository.CampanhaRepository;
 import com.nsrp.challenge.validation.PeriodoValidator;
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -39,6 +41,9 @@ public class CampanhaServiceTest {
 
     @InjectMocks
     private CampanhaService campanhaService;
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Captor
     private ArgumentCaptor<Campanha> campanhaArgumentCaptor;
@@ -90,6 +95,50 @@ public class CampanhaServiceTest {
         Long id = 1L;
         campanhaService.delete(id);
         Mockito.verify(campanhaRepository, Mockito.times(1)).deleteById(id);
+    }
+
+    @Test
+    public void updateCampanhaEncontrada() {
+        CampanhaModel model = new CampanhaModel();
+        model.setId(1L);
+        model.setDataInicio(LocalDate.of(2019, 10, 5));
+        model.setDataFim(LocalDate.of(2019, 10, 10));
+        model.setNome("CAMPANHA ABC");
+        model.setTimeDoCoracao("TIME 1");
+        Time timeMock = Mockito.mock(Time.class);
+        Mockito.when(timeMock.getNome()).thenReturn("TIME 1");
+        Mockito.when(timeService.findByNome("TIME 1")).thenReturn(Optional.of(timeMock));
+        Mockito.when(campanhaRepository.findById(model.getId())).thenReturn(Optional.of(Mockito.spy(Campanha.class)));
+
+        campanhaService.update(model);
+
+        Mockito.verify(campanhaRepository, Mockito.times(1)).save(campanhaArgumentCaptor.capture());
+        Campanha campanha = campanhaArgumentCaptor.getValue();
+
+        Assert.assertNotNull(campanha);
+        Assert.assertEquals(model.getNome(), campanha.getNome());
+        Assert.assertEquals(model.getTimeDoCoracao(), campanha.getTimeDoCoracao().getNome());
+        Assert.assertEquals(model.getDataInicio(), campanha.getDataInicioVigencia());
+        Assert.assertEquals(model.getDataFim(), campanha.getDataFimVigencia());
+        Assert.assertEquals(model.isAtiva(), campanha.isAtiva());
+    }
+
+    @Test
+    public void updateCampanhaNaoEncontrada() {
+        CampanhaModel model = new CampanhaModel();
+        model.setId(1L);
+        model.setDataInicio(LocalDate.of(2019, 10, 5));
+        model.setDataFim(LocalDate.of(2019, 10, 10));
+        model.setNome("CAMPANHA ABC");
+        model.setTimeDoCoracao("TIME 1");
+        Mockito.when(campanhaRepository.findById(model.getId())).thenReturn(Optional.empty());
+
+        String msg = "Nenhuma campanha encontrada, parâmetros informados: Nome: CAMPANHA ABC, Time do coração: TIME 1, " +
+                "Data inicio: 05/10/2019, Data fim: 10/10/2019";
+        expectedException.expectMessage(msg);
+        expectedException.expect(IllegalArgumentException.class);
+
+        campanhaService.update(model);
     }
 
     private void validateCampanha(Campanha campanha, Time timeDoCoracao) {

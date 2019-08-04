@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 public class CampanhaModel {
 
+    private Long id;
+
     private String nome;
 
     private String timeDoCoracao;
@@ -11,6 +13,8 @@ public class CampanhaModel {
     private LocalDate dataInicio;
 
     private LocalDate dataFim;
+
+    private boolean ativa;
 
     public CampanhaModel() {
         super();
@@ -21,6 +25,14 @@ public class CampanhaModel {
         this.timeDoCoracao = timeDoCoracao;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -53,5 +65,13 @@ public class CampanhaModel {
 
     public void setDataFim(LocalDate dataFim) {
         this.dataFim = dataFim;
+    }
+
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
     }
 }
