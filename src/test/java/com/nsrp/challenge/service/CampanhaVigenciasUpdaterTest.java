@@ -1,6 +1,8 @@
 package com.nsrp.challenge.service;
 
 import com.nsrp.challenge.domain.Campanha;
+import com.nsrp.challenge.service.campanha.CampanhaService;
+import com.nsrp.challenge.service.campanha.CampanhaVigenciasUpdater;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

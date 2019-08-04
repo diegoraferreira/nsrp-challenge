@@ -1,4 +1,4 @@
-package com.nsrp.challenge.service;
+package com.nsrp.challenge.service.campanha;
 
 import com.nsrp.challenge.domain.Campanha;
 import org.springframework.beans.factory.annotation.Autowired;

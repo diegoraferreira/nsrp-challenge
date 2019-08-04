@@ -1,9 +1,10 @@
-package com.nsrp.challenge.service;
+package com.nsrp.challenge.service.campanha;
 
 import com.nsrp.challenge.domain.Campanha;
 import com.nsrp.challenge.domain.Time;
 import com.nsrp.challenge.model.CampanhaModel;
 import com.nsrp.challenge.repository.CampanhaRepository;
+import com.nsrp.challenge.service.TimeService;
 import com.nsrp.challenge.validation.PeriodoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static com.nsrp.challenge.config.NsrpChallengeDateUtils.format;
+import static com.nsrp.challenge.utils.NsrpChallengeDateUtils.format;
 
 @Service
 public class CampanhaService {
@@ -26,6 +27,9 @@ public class CampanhaService {
 
     @Autowired
     private PeriodoValidator periodoValidator;
+
+    @Autowired
+    private CampanhaUpdateProducer campanhaUpdateProducer;
 
     @Transactional
     public void save(CampanhaModel campanhaModel) {
@@ -70,6 +74,7 @@ public class CampanhaService {
             campanha.setTimeDoCoracao(this.findOrCreateTimeDoCoracao(timeDoCoracao));
 
             this.repository.save(campanha);
+            this.campanhaUpdateProducer.sendMenssage(campanha);
         }
     }
 

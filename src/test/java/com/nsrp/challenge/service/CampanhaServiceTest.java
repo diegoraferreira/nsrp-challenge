@@ -4,6 +4,8 @@ import com.nsrp.challenge.domain.Campanha;
 import com.nsrp.challenge.domain.Time;
 import com.nsrp.challenge.model.CampanhaModel;
 import com.nsrp.challenge.repository.CampanhaRepository;
+import com.nsrp.challenge.service.campanha.CampanhaService;
+import com.nsrp.challenge.service.campanha.CampanhaUpdateProducer;
 import com.nsrp.challenge.validation.PeriodoValidator;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -38,6 +40,9 @@ public class CampanhaServiceTest {
 
     @Mock
     private PeriodoValidator periodoValidator;
+
+    @Mock
+    private CampanhaUpdateProducer campanhaUpdateProducer;
 
     @InjectMocks
     private CampanhaService campanhaService;
@@ -114,6 +119,7 @@ public class CampanhaServiceTest {
 
         Mockito.verify(campanhaRepository, Mockito.times(1)).save(campanhaArgumentCaptor.capture());
         Campanha campanha = campanhaArgumentCaptor.getValue();
+        Mockito.verify(campanhaUpdateProducer, Mockito.times(1)).sendMenssage(campanha);
 
         Assert.assertNotNull(campanha);
         Assert.assertEquals(model.getNome(), campanha.getNome());

@@ -1,4 +1,4 @@
-package com.nsrp.challenge.config;
+package com.nsrp.challenge.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

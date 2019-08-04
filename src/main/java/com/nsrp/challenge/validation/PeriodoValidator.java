@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.validation.ValidationException;
 import java.time.LocalDate;
 
-import static com.nsrp.challenge.config.NsrpChallengeDateUtils.format;
+import static com.nsrp.challenge.utils.NsrpChallengeDateUtils.format;
 
 @Component
 public class PeriodoValidator {
