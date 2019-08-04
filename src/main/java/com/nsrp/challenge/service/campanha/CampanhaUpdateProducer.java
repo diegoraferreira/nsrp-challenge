@@ -1,6 +1,6 @@
 package com.nsrp.challenge.service.campanha;
 
-import com.nsrp.challenge.domain.Campanha;
+import com.nsrp.challenge.model.campanha.CampanhaModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
@@ -15,7 +15,7 @@ public class CampanhaUpdateProducer {
     @Autowired
     private JmsTemplate jmsTemplate;
 
-    public void sendMenssage(Campanha campanha) {
-        jmsTemplate.convertAndSend(campanha);
+    public void sendMenssage(CampanhaModel campanha) {
+        jmsTemplate.convertAndSend(topicName, campanha);
     }
 }

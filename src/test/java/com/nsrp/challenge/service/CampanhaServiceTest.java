@@ -2,7 +2,7 @@ package com.nsrp.challenge.service;
 
 import com.nsrp.challenge.domain.Campanha;
 import com.nsrp.challenge.domain.Time;
-import com.nsrp.challenge.model.CampanhaModel;
+import com.nsrp.challenge.model.campanha.CampanhaModel;
 import com.nsrp.challenge.repository.CampanhaRepository;
 import com.nsrp.challenge.service.campanha.CampanhaService;
 import com.nsrp.challenge.service.campanha.CampanhaUpdateProducer;
@@ -15,7 +15,9 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.dao.DataIntegrityViolationException;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
@@ -76,6 +78,17 @@ public class CampanhaServiceTest {
     }
 
     @Test
+    public void saveCampanhaExistente() {
+        Mockito.when(timeService.findByNome(TIME_DO_CORACAO)).thenReturn(Optional.of(timeDoCoracao));
+        Mockito.when(campanhaRepository.save(Mockito.any(Campanha.class))).thenThrow(DataIntegrityViolationException.class);
+
+        expectedException.expectMessage("Já existe uma campanha cadastrada com o nome 'CAMPANHA'");
+        expectedException.expect(DataIntegrityViolationException.class);
+
+        campanhaService.save(campanhaModel);
+    }
+
+    @Test
     public void saveTimeNaoExistente() {
         Mockito.when(timeService.findByNome(TIME_DO_CORACAO)).thenReturn(Optional.empty());
         Mockito.when(timeService.save(TIME_DO_CORACAO)).thenReturn(timeDoCoracao);
@@ -119,7 +132,7 @@ public class CampanhaServiceTest {
 
         Mockito.verify(campanhaRepository, Mockito.times(1)).save(campanhaArgumentCaptor.capture());
         Campanha campanha = campanhaArgumentCaptor.getValue();
-        Mockito.verify(campanhaUpdateProducer, Mockito.times(1)).sendMenssage(campanha);
+        Mockito.verify(campanhaUpdateProducer, Mockito.times(1)).sendMenssage(model);
 
         Assert.assertNotNull(campanha);
         Assert.assertEquals(model.getNome(), campanha.getNome());
@@ -142,9 +155,15 @@ public class CampanhaServiceTest {
         String msg = "Nenhuma campanha encontrada, parâmetros informados: Nome: CAMPANHA ABC, Time do coração: TIME 1, " +
                 "Data inicio: 05/10/2019, Data fim: 10/10/2019";
         expectedException.expectMessage(msg);
-        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expect(EntityNotFoundException.class);
 
         campanhaService.update(model);
+    }
+
+    @Test
+    public void findAllTest() {
+        campanhaService.findAllCampanhasVigentes();
+        Mockito.verify(campanhaRepository, Mockito.times(1)).findAllCampanhasVigentes(Mockito.any(LocalDate.class));
     }
 
     private void validateCampanha(Campanha campanha, Time timeDoCoracao) {

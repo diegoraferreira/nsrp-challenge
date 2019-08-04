@@ -1,4 +1,4 @@
-package com.nsrp.challenge.model;
+package com.nsrp.challenge.model.campanha;
 
 import java.time.LocalDate;
 
@@ -18,6 +18,15 @@ public class CampanhaModel {
 
     public CampanhaModel() {
         super();
+    }
+
+    public CampanhaModel(Long id, String nome, String timeDoCoracao, LocalDate dataInicio, LocalDate dataFim, boolean ativa) {
+        this.id = id;
+        this.nome = nome;
+        this.timeDoCoracao = timeDoCoracao;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.ativa = ativa;
     }
 
     public CampanhaModel(String nome, String timeDoCoracao, LocalDate dataInicio, LocalDate dataFim) {

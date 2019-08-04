@@ -31,7 +31,7 @@ public class Campanha {
         this.id = id;
     }
 
-    @Column(name = "NOME", nullable = false)
+    @Column(name = "NOME", nullable = false, unique = true)
     public String getNome() {
         return nome;
     }
