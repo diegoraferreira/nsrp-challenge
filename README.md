@@ -10,6 +10,7 @@ Aplicação com finalidade de cadastro de campanhas promocionais.
 * Rest
 * Active MQ
 * JPA
+* Swagger
 * Jacoco
 * H2
 
@@ -26,12 +27,18 @@ A execução da aplicação poderá ser feita através das formas abaixo:
 
 #### Cobertura de testes
 
-A cobertura de testes unitários estará disponível na pasta target do projeto, para acessar o conteúdo será necessário
+A cobertura de testes unitários estará disponível na pasta target/site/ do projeto, para acessar o conteúdo será necessário
 executar o comando
 
 `mvn clean test`
 
 O conteúdo poderá ser visualizado em qualquer navegador executando o arquivo disponível em _target/site/jacoco/index.html_
+
+#### Documentação das API's
+
+A ferramenta swagger foi utilizada para documentar a utilização das API's disponíveis, o acesso poderá ser feito através
+do link [http://localhost:8080/nsrp-challenge/swagger-ui.html](http://localhost:8080/nsrp-challenge/swagger-ui.html)  quando a aplicação
+estiver disponível.
 
 #### To-do
 

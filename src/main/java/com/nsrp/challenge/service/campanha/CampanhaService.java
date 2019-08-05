@@ -50,8 +50,6 @@ public class CampanhaService {
         } catch (DataIntegrityViolationException e) {
             String msg = "Já existe uma campanha cadastrada com o nome '%s'";
             throw new DataIntegrityViolationException(String.format(msg, campanhaModel.getNome()), e);
-        } catch (Exception e) {
-            throw e;
         }
     }
 

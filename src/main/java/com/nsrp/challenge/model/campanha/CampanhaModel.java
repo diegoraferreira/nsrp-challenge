@@ -1,17 +1,26 @@
 package com.nsrp.challenge.model.campanha;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.time.LocalDate;
 
+@ApiModel(description = "Campanha")
 public class CampanhaModel {
 
+    @ApiModelProperty(value = "Código da campanha")
     private Long id;
 
+    @ApiModelProperty(value = "Nome da campanha")
     private String nome;
 
+    @ApiModelProperty(value = "Time do coração")
     private String timeDoCoracao;
 
+    @ApiModelProperty(value = "Data início da vigência")
     private LocalDate dataInicio;
 
+    @ApiModelProperty(value = "Data fim da vigência")
     private LocalDate dataFim;
 
     private boolean ativa;

@@ -1,5 +1,9 @@
 package com.nsrp.challenge.controller.campanha;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "Campanha Response")
 public class CampanhaResponse {
 
     private String nomeCampanha;
@@ -18,6 +22,7 @@ public class CampanhaResponse {
         this.dataVigencia = dataVigencia;
     }
 
+    @ApiModelProperty(value = "Nome da campanha")
     public String getNomeCampanha() {
         return nomeCampanha;
     }
@@ -26,6 +31,7 @@ public class CampanhaResponse {
         this.nomeCampanha = nomeCampanha;
     }
 
+    @ApiModelProperty(value = "Id do time do coração")
     public Long getIdTimeCoracao() {
         return idTimeCoracao;
     }
@@ -34,6 +40,7 @@ public class CampanhaResponse {
         this.idTimeCoracao = idTimeCoracao;
     }
 
+    @ApiModelProperty(value = "Data início vigência - Data fim vigência")
     public String getDataVigencia() {
         return dataVigencia;
     }
