@@ -41,7 +41,7 @@ public class Campanha {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name = "FK_TIME"))
+    @JoinColumn(name = "ID_TIME", nullable = false, foreignKey = @ForeignKey(name = "FK_TIME_CAMPANHA"))
     public Time getTimeDoCoracao() {
         return timeDoCoracao;
     }
