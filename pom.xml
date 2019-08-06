@@ -11,7 +11,7 @@
     <groupId>com.nsrp.challenge</groupId>
     <artifactId>nsrp-challenge-campanha</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>nsrp-challenge</name>
+    <name>nsrp-challenge-campanha</name>
     <description>NSRP - Challenge</description>
 
     <properties>
@@ -111,7 +111,7 @@
                 </executions>
                 <configuration>
                     <repository>nsrp-challenge-campanha</repository>
-                    <tag>nsrp-challenge-campanha-${project.version}</tag>
+                    <tag>latest</tag>
                     <verbose>true</verbose>
                 </configuration>
             </plugin>
