@@ -142,6 +142,34 @@ public class CampanhaControllerTest {
     }
 
     @Test
+    public void findByTimeDoCoracao() throws Exception {
+        CampanhaModel campanha1 = new CampanhaModel();
+        campanha1.setId(1L);
+        campanha1.setNome("Campanha 1");
+        campanha1.setDataInicio(LocalDate.of(2019, 2, 1));
+        campanha1.setDataFim(LocalDate.of(2019, 2, 10));
+        campanha1.setTimeDoCoracao("Time do coração 1");
+        campanha1.setAtiva(true);
+
+        Mockito.when(campanhaService.findCampanhasVigentesPorTimeDoCoracao(1L)).thenReturn(Arrays.asList(campanha1));
+
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/campanha/list/timedocoracao/{id}", 1L)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value("1"))
+                .andExpect(jsonPath("$[0].nome").value("Campanha 1"))
+                .andExpect(jsonPath("$[0].timeDoCoracao").value("Time do coração 1"))
+                .andExpect(jsonPath("$[0].dataInicio[0]").value("2019"))
+                .andExpect(jsonPath("$[0].dataInicio[1]").value("2"))
+                .andExpect(jsonPath("$[0].dataInicio[2]").value("1"))
+                .andExpect(jsonPath("$[0].dataFim[0]").value("2019"))
+                .andExpect(jsonPath("$[0].dataFim[1]").value("2"))
+                .andExpect(jsonPath("$[0].dataFim[2]").value("10"));
+    }
+
+    @Test
     public void delete() throws Exception {
         Long camapanhaId = 1L;
         Mockito.doNothing().when(campanhaService).delete(camapanhaId);

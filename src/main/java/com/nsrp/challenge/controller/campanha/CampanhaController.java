@@ -29,7 +29,6 @@ public class CampanhaController {
     @ApiOperation(value = "Cadastro de campanha")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Campanha cadastrada com sucesso", response = CampanhaResponse.class),
-            @ApiResponse(code = 404, message = "Campanha não encontrada", response = ApiError.class),
             @ApiResponse(code = 500, message = "Erro interno do servidor ao cadastrar a campanha", response = ApiError.class),
     })
     @PostMapping(produces = APPLICATION_JSON_UTF8_VALUE, consumes = APPLICATION_JSON_UTF8_VALUE)
@@ -73,5 +72,15 @@ public class CampanhaController {
     public ResponseEntity delete(@PathVariable("id") Long id) {
         this.campanhaService.delete(id);
         return ResponseEntity.ok().build();
+    }
+
+    @ApiOperation(value = "Lista todas as campanhas vigentes para o time do coração informado")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Campanhas encontradas"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor ao buscar as campanhas", response = ApiError.class),
+    })
+    @GetMapping(value = "list/timedocoracao/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
+    public List<CampanhaModel> findByTimeDoCoracao(@PathVariable("id") Long id) {
+        return this.campanhaService.findCampanhasVigentesPorTimeDoCoracao(id);
     }
 }

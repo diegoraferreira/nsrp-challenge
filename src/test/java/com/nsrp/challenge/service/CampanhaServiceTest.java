@@ -166,6 +166,12 @@ public class CampanhaServiceTest {
         Mockito.verify(campanhaRepository, Mockito.times(1)).findAllCampanhasVigentes(Mockito.any(LocalDate.class));
     }
 
+    @Test
+    public void findAllCampanhasVigentesPorTimeDoCoracao() {
+        campanhaService.findCampanhasVigentesPorTimeDoCoracao(1L);
+        Mockito.verify(campanhaRepository, Mockito.times(1)).findCampanhasVigentesPorTimeDoCoracao(1L, LocalDate.now());
+    }
+
     private void validateCampanha(Campanha campanha, Time timeDoCoracao) {
         Assert.assertNotNull(campanha);
         Assert.assertEquals(NOME_CAMPANHA, campanha.getNome());

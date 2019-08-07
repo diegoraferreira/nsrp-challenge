@@ -23,6 +23,7 @@ public class CampanhaModel {
     @ApiModelProperty(value = "Data fim da vigência")
     private LocalDate dataFim;
 
+    @ApiModelProperty(value = "Ativa")
     private boolean ativa;
 
     public CampanhaModel() {

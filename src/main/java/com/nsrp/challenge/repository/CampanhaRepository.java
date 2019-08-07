@@ -32,4 +32,15 @@ public interface CampanhaRepository extends JpaRepository<Campanha, Long> {
             "WHERE campanha.dataFimVigencia >= :dataFim " +
             "ORDER BY campanha.nome, campanha.dataFimVigencia DESC")
     List<CampanhaModel> findAllCampanhasVigentes(@Param("dataFim") LocalDate dataFim);
+
+    @Query(" SELECT new com.nsrp.challenge.model.campanha.CampanhaModel (" +
+            "   campanha.id, campanha.nome, timeDoCoracao.nome, campanha.dataInicioVigencia, " +
+            "   campanha.dataFimVigencia, campanha.ativa " +
+            "   ) " +
+            "FROM Campanha campanha " +
+            "JOIN campanha.timeDoCoracao timeDoCoracao " +
+            "WHERE campanha.dataFimVigencia >= :dataFim " +
+            "AND timeDoCoracao.id = :idTimeDoCoracao " +
+            "ORDER BY campanha.nome, campanha.dataFimVigencia DESC")
+    List<CampanhaModel> findCampanhasVigentesPorTimeDoCoracao(@Param("idTimeDoCoracao") Long id, @Param("dataFim") LocalDate dataFim);
 }
