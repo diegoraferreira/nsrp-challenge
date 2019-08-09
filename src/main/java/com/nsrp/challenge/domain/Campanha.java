@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "CAMPANHA", indexes = @Index(name = "IX_NOME", columnList = "NOME", unique = true))
+@Table(name = "CAMPANHA", indexes = @Index(name = "IX_NOME_CAMPANHA", columnList = "NOME", unique = true))
 @SequenceGenerator(name = "SEQ_CAMPANHA", sequenceName = "SEQ_CAMPANHA")
 public class Campanha {
 

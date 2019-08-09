@@ -3,7 +3,7 @@ package com.nsrp.challenge.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "TIME", indexes = @Index(name = "IX_NOME", columnList = "NOME", unique = true))
+@Table(name = "TIME", indexes = @Index(name = "IX_NOME_TIME", columnList = "NOME", unique = true))
 @SequenceGenerator(name = "SEQ_TIME", sequenceName = "SEQ_TIME")
 public class Time {
 
