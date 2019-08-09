@@ -73,14 +73,14 @@ public class CampanhaServiceTest {
 
         Mockito.verify(periodoValidator, Mockito.times(1)).validate(DATA_INICIO, DATA_FIM);
         Mockito.verify(timeService, Mockito.never()).save(TIME_DO_CORACAO);
-        Mockito.verify(campanhaRepository, Mockito.times(1)).save(campanhaArgumentCaptor.capture());
+        Mockito.verify(campanhaRepository, Mockito.times(1)).saveAndFlush(campanhaArgumentCaptor.capture());
         this.validateCampanha(campanhaArgumentCaptor.getValue(), timeDoCoracao);
     }
 
     @Test
     public void saveCampanhaExistente() {
         Mockito.when(timeService.findByNome(TIME_DO_CORACAO)).thenReturn(Optional.of(timeDoCoracao));
-        Mockito.when(campanhaRepository.save(Mockito.any(Campanha.class))).thenThrow(DataIntegrityViolationException.class);
+        Mockito.when(campanhaRepository.saveAndFlush(Mockito.any(Campanha.class))).thenThrow(DataIntegrityViolationException.class);
 
         expectedException.expectMessage("Já existe uma campanha cadastrada com o nome 'CAMPANHA'");
         expectedException.expect(DataIntegrityViolationException.class);
@@ -97,7 +97,7 @@ public class CampanhaServiceTest {
 
         Mockito.verify(periodoValidator, Mockito.times(1)).validate(DATA_INICIO, DATA_FIM);
         Mockito.verify(timeService, Mockito.times(1)).save(TIME_DO_CORACAO);
-        Mockito.verify(campanhaRepository, Mockito.times(1)).save(campanhaArgumentCaptor.capture());
+        Mockito.verify(campanhaRepository, Mockito.times(1)).saveAndFlush(campanhaArgumentCaptor.capture());
         this.validateCampanha(campanhaArgumentCaptor.getValue(), timeDoCoracao);
     }
 

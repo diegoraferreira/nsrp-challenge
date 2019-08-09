@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "CAMPANHA")
+@Table(name = "CAMPANHA", indexes = @Index(name = "IX_NOME", columnList = "NOME", unique = true))
 @SequenceGenerator(name = "SEQ_CAMPANHA", sequenceName = "SEQ_CAMPANHA")
 public class Campanha {
 
@@ -31,7 +31,7 @@ public class Campanha {
         this.id = id;
     }
 
-    @Column(name = "NOME", nullable = false, unique = true)
+    @Column(name = "NOME", nullable = false)
     public String getNome() {
         return nome;
     }
