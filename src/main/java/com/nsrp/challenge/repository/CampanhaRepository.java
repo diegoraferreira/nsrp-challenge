@@ -40,7 +40,7 @@ public interface CampanhaRepository extends JpaRepository<Campanha, Long> {
             "FROM Campanha campanha " +
             "JOIN campanha.timeDoCoracao timeDoCoracao " +
             "WHERE campanha.dataFimVigencia >= :dataFim " +
-            "AND timeDoCoracao.id = :idTimeDoCoracao " +
+            "AND timeDoCoracao.nome = :timeDoCoracao " +
             "ORDER BY campanha.nome, campanha.dataFimVigencia DESC")
-    List<CampanhaModel> findCampanhasVigentesPorTimeDoCoracao(@Param("idTimeDoCoracao") Long id, @Param("dataFim") LocalDate dataFim);
+    List<CampanhaModel> findCampanhasVigentesPorTimeDoCoracao(@Param("timeDoCoracao") String timeDoCoracao, @Param("dataFim") LocalDate dataFim);
 }

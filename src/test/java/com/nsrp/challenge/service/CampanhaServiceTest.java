@@ -168,8 +168,8 @@ public class CampanhaServiceTest {
 
     @Test
     public void findAllCampanhasVigentesPorTimeDoCoracao() {
-        campanhaService.findCampanhasVigentesPorTimeDoCoracao(1L);
-        Mockito.verify(campanhaRepository, Mockito.times(1)).findCampanhasVigentesPorTimeDoCoracao(1L, LocalDate.now());
+        campanhaService.findCampanhasVigentesPorTimeDoCoracao("Time Do coração");
+        Mockito.verify(campanhaRepository, Mockito.times(1)).findCampanhasVigentesPorTimeDoCoracao("Time Do coração", LocalDate.now());
     }
 
     private void validateCampanha(Campanha campanha, Time timeDoCoracao) {

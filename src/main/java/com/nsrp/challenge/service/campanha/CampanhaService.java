@@ -92,8 +92,8 @@ public class CampanhaService {
     }
 
     @Transactional(readOnly = true)
-    public List<CampanhaModel> findCampanhasVigentesPorTimeDoCoracao(Long id) {
-        return this.repository.findCampanhasVigentesPorTimeDoCoracao(id, LocalDate.now());
+    public List<CampanhaModel> findCampanhasVigentesPorTimeDoCoracao(String timeDoCoracao) {
+        return this.repository.findCampanhasVigentesPorTimeDoCoracao(timeDoCoracao, LocalDate.now());
     }
 
     @Transactional(readOnly = true)

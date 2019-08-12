@@ -79,8 +79,8 @@ public class CampanhaController {
             @ApiResponse(code = 200, message = "Campanhas encontradas"),
             @ApiResponse(code = 500, message = "Erro interno do servidor ao buscar as campanhas", response = ApiError.class),
     })
-    @GetMapping(value = "list/timedocoracao/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
-    public List<CampanhaModel> findByTimeDoCoracao(@PathVariable("id") Long id) {
-        return this.campanhaService.findCampanhasVigentesPorTimeDoCoracao(id);
+    @GetMapping(value = "list/timedocoracao/{timeDoCoracao}", produces = APPLICATION_JSON_UTF8_VALUE)
+    public List<CampanhaModel> findByTimeDoCoracao(@PathVariable("timeDoCoracao") String timeDoCoracao) {
+        return this.campanhaService.findCampanhasVigentesPorTimeDoCoracao(timeDoCoracao);
     }
 }

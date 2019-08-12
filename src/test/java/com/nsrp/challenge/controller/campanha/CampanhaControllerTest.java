@@ -148,19 +148,19 @@ public class CampanhaControllerTest {
         campanha1.setNome("Campanha 1");
         campanha1.setDataInicio(LocalDate.of(2019, 2, 1));
         campanha1.setDataFim(LocalDate.of(2019, 2, 10));
-        campanha1.setTimeDoCoracao("Time do coração 1");
+        campanha1.setTimeDoCoracao("Time");
         campanha1.setAtiva(true);
 
-        Mockito.when(campanhaService.findCampanhasVigentesPorTimeDoCoracao(1L)).thenReturn(Arrays.asList(campanha1));
+        Mockito.when(campanhaService.findCampanhasVigentesPorTimeDoCoracao("Time")).thenReturn(Arrays.asList(campanha1));
 
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/campanha/list/timedocoracao/{id}", 1L)
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get("/campanha/list/timedocoracao/{timeDoCoracao}", "Time")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
         resultActions.andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value("1"))
                 .andExpect(jsonPath("$[0].nome").value("Campanha 1"))
-                .andExpect(jsonPath("$[0].timeDoCoracao").value("Time do coração 1"))
+                .andExpect(jsonPath("$[0].timeDoCoracao").value("Time"))
                 .andExpect(jsonPath("$[0].dataInicio[0]").value("2019"))
                 .andExpect(jsonPath("$[0].dataInicio[1]").value("2"))
                 .andExpect(jsonPath("$[0].dataInicio[2]").value("1"))
