@@ -1,6 +1,5 @@
 package com.nsrp.challenge.controller.time;
 
-import com.nsrp.challenge.domain.Time;
 import com.nsrp.challenge.exceptionhandler.ApiError;
 import com.nsrp.challenge.model.time.TimeModel;
 import com.nsrp.challenge.service.TimeService;
@@ -32,13 +31,25 @@ public class TimeController {
             @ApiResponse(code = 200, message = "Time encontrado"),
             @ApiResponse(code = 500, message = "Erro interno do servidor ao buscar o time", response = ApiError.class),
     })
-    @GetMapping(value = "list/{nome}", produces = APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "list/nome/{nome}", produces = APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<TimeModel> findByNome(@PathVariable("nome") String nome) {
-        Optional<Time> timeOptional = this.timeService.findByNome(nome);
+        Optional<TimeModel> timeOptional = this.timeService.findModelByNome(nome);
         if (timeOptional.isPresent()) {
-            Time time = timeOptional.get();
-            TimeModel timeModel = new TimeModel(time.getId(), time.getNome());
-            return ResponseEntity.ok().body(timeModel);
+            return ResponseEntity.ok().body(timeOptional.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @ApiOperation(value = "Retorna o time a partir do id informado")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Time encontrado"),
+            @ApiResponse(code = 500, message = "Erro interno do servidor ao buscar o time", response = ApiError.class),
+    })
+    @GetMapping(value = "list/id/{id}", produces = APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<TimeModel> findByTimeId(@PathVariable("id") Long id) {
+        Optional<TimeModel> timeOptional = this.timeService.findByTimeId(id);
+        if (timeOptional.isPresent()) {
+            return ResponseEntity.ok().body(timeOptional.get());
         }
         return ResponseEntity.notFound().build();
     }
