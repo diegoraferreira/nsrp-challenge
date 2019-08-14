@@ -24,7 +24,7 @@ A execução da aplicação poderá ser feita através das formas abaixo:
 
 * Na raiz do projeto, executar o comando `mvn spring-boot:run`
 
-* Executar o comando `mvn clean install` e em seguida o comando `java -jar target/nsrp-challenge-0.0.1-SNAPSHOT.jar`
+* Executar o comando `mvn clean install` e em seguida o comando `java -jar target/nsrp-challenge-campanha-0.0.1-SNAPSHOT.jar`
 
 * A configuração padrão estará pronta para rodar em docker, juntamente com o docker-compose do projeto.
 Para executar localmente sem depender do ambiente, basta adicionar a configuração de profile do spring `-Dspring.profiles.active=test`
