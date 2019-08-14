@@ -28,7 +28,7 @@ A execução da aplicação poderá ser feita através das formas abaixo:
 
 * A configuração padrão estará pronta para rodar em docker, juntamente com o docker-compose do projeto.
 Para executar localmente sem depender do ambiente, basta adicionar a configuração de profile do spring `-Dspring.profiles.active=test`
-antes de iniciar a aplicação .
+antes de iniciar a aplicação para execução com base H2 em memória.
 
 #### Cobertura de testes
 
@@ -44,5 +44,11 @@ O conteúdo poderá ser visualizado em qualquer navegador executando o arquivo d
 A ferramenta swagger foi utilizada para documentar a utilização das API's disponíveis, o acesso poderá ser feito através
 do link [http://localhost:8080/nsrp-challenge-campanha/swagger-ui.html](http://localhost:8080/nsrp-challenge-campanha/swagger-ui.html)  quando a aplicação
 estiver disponível.
+
+#### Deploy
+
+O build no maven irá gerar por padrão (caso os testes não falhem), uma imagem em docker com o nome `nsrp-challenge-campanha`
+e tag `latest`. A imagem gerada estará pronta para ser utilizada no docker-compose configurado para trabalhar com os 
+demais serviços disponíveis, o banco de dados Mysql e o ActiveMQ.
 
 
