@@ -2,6 +2,18 @@
 
 Aplicação com finalidade de cadastro de campanhas promocionais.
 
+#### Sobre a aplicação
+
+A utilização da aplicação será através das API's disponibilizadas, o payload e as URI's poderão ser consultadas na documentação
+disponibilizada na ferramenta swagger.
+
+A alteração no cadastro de campanhas será notificada através do tópico ``CampanhaUpdateTopic`` configurado no ActiveMQ. 
+Para os interessados em consumir esta informação, será necessário "assinar" o tópico para receber a informação
+no formato json.
+
+A aplicação possui uma validação para que as datas da campanha não sejam inválidas, ou seja, a data de inicio seja superior
+a data final. A aplicação possui uma lógica para evitar colisão de datas no cadastro de campanhas.
+
 #### Técnologias utilizadas
 
 * Java 8
@@ -50,5 +62,6 @@ estiver disponível.
 O build no maven irá gerar por padrão (caso os testes não falhem), uma imagem em docker com o nome `nsrp-challenge-campanha`
 e tag `latest`. A imagem gerada estará pronta para ser utilizada no docker-compose configurado para trabalhar com os 
 demais serviços disponíveis, o banco de dados Mysql e o ActiveMQ.
+
 
 
