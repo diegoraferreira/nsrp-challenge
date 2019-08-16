@@ -14,6 +14,9 @@ A alteração no cadastro de campanhas será notificada através do tópico ``Ca
 Para os interessados em consumir esta informação, será necessário "assinar" o tópico para receber a informação
 no formato json.
 
+A consulta de campanhas irá retornar apenas campanhas vigentes a partir da data da consulta, ou seja, data inicio superior 
+a data atual e data fim inferior a data atual.
+
 A aplicação possui uma validação para que as datas da campanha não sejam inválidas, ou seja, a data de inicio seja superior
 a data final. A aplicação possui uma lógica para evitar colisão de datas no cadastro de campanhas.
 
