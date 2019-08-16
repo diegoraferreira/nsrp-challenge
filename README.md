@@ -7,7 +7,7 @@ Aplicação com finalidade de cadastro de campanhas promocionais.
 A utilização da aplicação será através das API's disponibilizadas, o payload e as URI's poderão ser consultadas na documentação
 disponibilizada na ferramenta swagger.
 
-O cadastro de campanha irá automáticamente cadastrar um time caso o mesmo não exista, caso exista a mesma referência será 
+O cadastro de campanha irá automáticamente cadastrar um time caso o mesmo não exista. Caso exista, a mesma referência será 
 utilizada para o cadastro de outras campanhas para o mesmo time. 
 
 A alteração no cadastro de campanhas será notificada através do tópico ``CampanhaUpdateTopic`` configurado no ActiveMQ. 
